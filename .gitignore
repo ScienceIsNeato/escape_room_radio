@@ -1,0 +1,6 @@
+*.dSYM
+.vscode*
+
+# don't commit binary files
+escape_room_radio
+test_suite
