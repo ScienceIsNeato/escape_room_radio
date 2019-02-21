@@ -1,3 +1,6 @@
+#ifndef ROCKER_H
+#define ROCKER_H
+
 #include <string>
 
 class Rocker
@@ -21,3 +24,5 @@ public:
     std::string GetOnString();
     std::string GetOffString();
 };
+
+#endif

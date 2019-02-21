@@ -2,8 +2,8 @@
 
 Rocker::Rocker()
 {
-    SetOffString("OFF");
-    SetOnString("ON");
+    SetOffString("");
+    SetOnString("");
 }
 
 Rocker::Rocker(std::string off_str, std::string on_str)

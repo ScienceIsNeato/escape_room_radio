@@ -1,7 +1,10 @@
 #include <iostream>
+#include <memory>
 #include "../../include/player.h"
 #include "../../include/rocker.h"
 #include "../../include/slider.h"
+#include "../../include/gps_interface.h"
+#include "../../include/gps_coordinates.h"
 
 
 using namespace std;
@@ -44,6 +47,68 @@ int main()
     tweaked_slider.SetValue(500);
     cout << "Default slider mapped value should be 90 -  is... " << tweaked_slider.GetMappedValue() << std::endl;
 
+
+    /************* Testing GPS class *******************/
+    std::shared_ptr<Rocker> e_w_rocker = std::make_shared<Rocker>(GPS::EAST, GPS::WEST);
+    std::shared_ptr<Slider> e_w_slider = std::make_shared<Slider>();
+    std::shared_ptr<Rocker> n_s_rocker = std::make_shared<Rocker>(GPS::NORTH, GPS::SOUTH);
+    std::shared_ptr<Slider> n_s_slider = std::make_shared<Slider>();
+
+    GPS::GPSCoordinates correct_coords;
+
+    // Current Defaults
+    correct_coords.lat_label = GPS::EAST;
+    correct_coords.long_label = GPS::NORTH;
+    correct_coords.latitude = 0.0;
+    correct_coords.longitude = 0.0;
+
+    //GPS::GPSInterface gps_int(rocker, rocker, slider, slider, correct_coords);
+    std::shared_ptr<GPS::GPSInterface> gps_int = std::make_shared<GPS::GPSInterface>(
+        e_w_rocker,
+        n_s_rocker,
+        e_w_slider,
+        n_s_slider, correct_coords);
+
+    gps_int->PrintCoords(gps_int->GetCurrentCoords());
+
+    assert(gps_int->CoordsCorrect(gps_int->GetCurrentCoords()) == true);
+    std::cout << "Passed Test 1...\n";
+
+    // East Wrong
+    correct_coords.lat_label = GPS::WEST;
+    correct_coords.long_label = GPS::NORTH;
+    correct_coords.latitude = 0.0;
+    correct_coords.longitude = 0.0;
+    gps_int->SetCorrectCoords(correct_coords);
+    assert(gps_int->CoordsCorrect(gps_int->GetCurrentCoords()) == false);
+    std::cout << "GPS::Passed Test 2...\n";
+
+    // North Wrong
+    correct_coords.lat_label = GPS::EAST;
+    correct_coords.long_label = GPS::SOUTH;
+    correct_coords.latitude = 0.0;
+    correct_coords.longitude = 0.0;
+    gps_int->SetCorrectCoords(correct_coords);
+    assert(gps_int->CoordsCorrect(gps_int->GetCurrentCoords()) == false);
+    std::cout << "GPS::Passed Test 3...\n";
+
+    // Lat Wrong
+    correct_coords.lat_label = GPS::EAST;
+    correct_coords.long_label = GPS::NORTH;
+    correct_coords.latitude = 0.1;
+    correct_coords.longitude = 0.0;
+    gps_int->SetCorrectCoords(correct_coords);
+    assert(gps_int->CoordsCorrect(gps_int->GetCurrentCoords()) == false);
+    std::cout << "GPS::Passed Test 4...\n";
+
+    // Long Wrong
+    correct_coords.lat_label = GPS::EAST;
+    correct_coords.long_label = GPS::NORTH;
+    correct_coords.latitude = 0.0;
+    correct_coords.longitude = 0.1;
+    gps_int->SetCorrectCoords(correct_coords);
+    assert(gps_int->CoordsCorrect(gps_int->GetCurrentCoords()) == false);
+    std::cout << "GPS::Passed Test 5...\n";
 
     return 0;
 }

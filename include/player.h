@@ -1,3 +1,6 @@
+#ifndef PLAYER_H
+#define PLAYER_H
+
 class Player
 {
 private:
@@ -11,3 +14,6 @@ public:
 
     void play_audio(bool correct);
 };
+
+
+#endif

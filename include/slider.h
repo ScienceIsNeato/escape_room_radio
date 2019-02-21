@@ -1,3 +1,6 @@
+#ifndef SLIDER_H
+#define SLIDER_H
+
 #include <string>
 
 class Slider
@@ -28,3 +31,5 @@ public:
     void SetValue(const double val); // DEBUG ONLY
 
 };
+
+#endif
