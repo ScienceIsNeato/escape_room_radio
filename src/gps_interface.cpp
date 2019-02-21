@@ -1,5 +1,6 @@
 #include "../include/gps_interface.h"
 #include <iostream>
+#include <math.h>
 
 namespace GPS
 {
@@ -36,6 +37,15 @@ namespace GPS
         return current_coords;
     }
 
+    void GPSInterface::SetTolerance(double tolerance)
+    {
+        _tolerance = tolerance;
+    }
+
+    double GPSInterface::GetTolerance()
+    {
+        return _tolerance;
+    }
 
     void GPSInterface::PrintCoords(GPS::GPSCoordinates coords)
     {
@@ -58,11 +68,11 @@ namespace GPS
         {
             ret_val = false;
         }
-        if(coords.latitude != _correct_coords.latitude)
+        if(fabs(coords.latitude - _correct_coords.latitude) > _tolerance)
         {
             ret_val = false;
         }
-        if(coords.longitude != _correct_coords.longitude)
+        if(fabs(coords.longitude != _correct_coords.longitude) > _tolerance)
         {
             ret_val = false;
         }

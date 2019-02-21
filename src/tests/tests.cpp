@@ -69,6 +69,7 @@ int main()
         e_w_slider,
         n_s_slider, correct_coords);
 
+    gps_int->SetTolerance(0);
     gps_int->PrintCoords(gps_int->GetCurrentCoords());
 
     assert(gps_int->CoordsCorrect(gps_int->GetCurrentCoords()) == true);
@@ -109,6 +110,16 @@ int main()
     gps_int->SetCorrectCoords(correct_coords);
     assert(gps_int->CoordsCorrect(gps_int->GetCurrentCoords()) == false);
     std::cout << "GPS::Passed Test 5...\n";
+
+    // Tolerance obeyed
+    gps_int->SetTolerance(5.0);
+    correct_coords.lat_label = GPS::EAST;
+    correct_coords.long_label = GPS::NORTH;
+    correct_coords.latitude = 0.0 + gps_int->GetTolerance();
+    correct_coords.longitude = 0.0 + gps_int->GetTolerance();
+    gps_int->SetCorrectCoords(correct_coords);
+    assert(gps_int->CoordsCorrect(gps_int->GetCurrentCoords()) == true);
+    std::cout << "GPS::Passed Test 6...\n";
 
     return 0;
 }

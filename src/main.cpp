@@ -34,6 +34,5 @@ int main()
 
     gps_int->PrintCoords(gps_int->GetCurrentCoords());
 
-    // TODO: Need to give it some wiggle!
     return 0;
 }

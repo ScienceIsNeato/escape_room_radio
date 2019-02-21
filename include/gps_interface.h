@@ -16,6 +16,7 @@ namespace GPS
         std::shared_ptr<Rocker> _E_W_rocker;
         std::shared_ptr<Slider> _N_S_slider;
         std::shared_ptr<Slider> _E_W_slider;
+        double _tolerance = 5.0; // default degrees allowable off
 
     public:
         GPSInterface(   std::shared_ptr<Rocker> N_S_rocker,
@@ -28,6 +29,8 @@ namespace GPS
         ~GPSInterface();
 
         void SetCorrectCoords(GPS::GPSCoordinates coords);
+        void SetTolerance(double tolerance);
+        double GetTolerance();
         void PrintCoords(GPS::GPSCoordinates coords);
         bool CoordsCorrect(GPS::GPSCoordinates coords);
         GPS::GPSCoordinates GetCurrentCoords();
