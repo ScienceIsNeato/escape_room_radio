@@ -13,7 +13,7 @@ using namespace std;
 
 int main() 
 {
-    /* 
+     
     // Testing the player class
     Player player;
     cout << "About to call correct...";
@@ -21,7 +21,7 @@ int main()
 
     cout << "About to call incorrect...";
     player.play_audio(false);
-    */
+    
 
     /*
     // Testing the rocker class
