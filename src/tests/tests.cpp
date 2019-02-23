@@ -4,6 +4,7 @@
 #include "../../include/player.h"
 #include "../../include/rocker.h"
 #include "../../include/slider.h"
+#include "../../include/trigger.h"
 #include "../../include/gps_interface.h"
 #include "../../include/gps_coordinates.h"
 
