@@ -1,5 +1,6 @@
 #include <iostream>
 #include <memory>
+#include "assert.h"
 #include "../../include/player.h"
 #include "../../include/rocker.h"
 #include "../../include/slider.h"
@@ -40,7 +41,7 @@ int main()
     default_slider.SetValue(128);
     cout << "Default slider mapped value should be 45 -  is... " << default_slider.GetMappedValue() << std::endl;
 
-    Slider tweaked_slider((double[2]) {0,1000}, (double[2]) {0, 180});
+    Slider tweaked_slider((const double[2]) {0,1000}, (const double[2]) {0, 180});
     cout << "Default slider mapped value should be 0 -  is... " << tweaked_slider.GetMappedValue() << std::endl;
     tweaked_slider.SetValue(1000);
     cout << "Default slider mapped value should be 180 -  is... " << tweaked_slider.GetMappedValue() << std::endl;

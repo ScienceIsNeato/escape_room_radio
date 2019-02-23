@@ -3,7 +3,9 @@
 Slider::Slider()
 {
     // Use default values
-    SetRanges((double[2]) { DEF_MIN_VAL, DEF_MAX_VAL }, (double[2]) { DEF_MIN_DEGREES, DEF_MAX_DEGREES });
+    const double vals[2] = {DEF_MIN_VAL, DEF_MAX_VAL};
+    const double degs[2] = {DEF_MIN_DEGREES, DEF_MAX_DEGREES};
+    SetRanges(vals, degs);
 }
 
 Slider::Slider(const double in_range[2], const double map_range[2])
